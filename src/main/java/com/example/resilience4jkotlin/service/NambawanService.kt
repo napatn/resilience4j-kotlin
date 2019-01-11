@@ -9,6 +9,6 @@ class NambawanService(
 ) {
 
     fun method1(): String {
-        return serviceClient.failed()
+        return serviceClient.getDataWithCircuitBreaker()
     }
 }

@@ -1,0 +1,7 @@
+resilience4j.circuitbreaker:
+    backends:
+        nambawan:
+            ringBufferSizeInClosedState: 6
+            ringBufferSizeInHalfOpenState: 3
+            waitInterval: 7000
+            failureRateThreshold: 50
