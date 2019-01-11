@@ -8,7 +8,7 @@ class NambawanService(
         val serviceClient: NambawanServiceClient
 ) {
 
-    fun success(): String {
-        return serviceClient.success()
+    fun method1(): String {
+        return serviceClient.failed()
     }
 }

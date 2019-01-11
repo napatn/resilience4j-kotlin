@@ -8,4 +8,8 @@ class NambawanServiceClient() {
     fun success(): String {
         return "success"
     }
+
+    fun failed(): String {
+        throw Exception("an error")
+    }
 }

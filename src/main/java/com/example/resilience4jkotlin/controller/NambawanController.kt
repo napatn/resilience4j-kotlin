@@ -11,8 +11,8 @@ class NambawanController(
         val service: NambawanService
 ) {
 
-    @GetMapping("/success")
-    fun success(): String {
-        return service.success()
+    @GetMapping("/method1")
+    fun method1(): String {
+        return service.method1()
     }
 }
