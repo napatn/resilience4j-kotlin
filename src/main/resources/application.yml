@@ -19,7 +19,9 @@ management:
 resilience4j.circuitbreaker:
     backends:
         nambawan:
-            ringBufferSizeInClosedState: 6
+            ringBufferSizeInClosedState: 5
             ringBufferSizeInHalfOpenState: 3
             waitInterval: 7000
-            failureRateThreshold: 50
+            failureRateThreshold: 40
+            ignoreExceptions:
+              - com.example.resilience4jkotlin.exception.IgnoreThisException
