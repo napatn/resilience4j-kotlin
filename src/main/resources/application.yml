@@ -22,6 +22,7 @@ resilience4j.circuitbreaker:
             ringBufferSizeInClosedState: 5
             ringBufferSizeInHalfOpenState: 3
             waitInterval: 7000
-            failureRateThreshold: 40
-            ignoreExceptions:
-              - com.example.resilience4jkotlin.exception.IgnoreThisException
+            failureRateThreshold: 50
+            recordFailurePredicate: com.example.resilience4jkotlin.predicate.NambawanCircuitBreakerPredicate
+#            ignoreExceptions:
+#              - com.example.resilience4jkotlin.exception.IgnoreThisException

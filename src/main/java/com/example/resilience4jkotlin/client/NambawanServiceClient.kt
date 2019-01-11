@@ -13,7 +13,7 @@ class NambawanServiceClient(
 ) {
 
     fun getDataWithCircuitBreaker(): String {
-        val function = CircuitBreaker.decorateSupplier(circuitBreaker, { this.myRNG() })
+        val function = CircuitBreaker.decorateSupplier(circuitBreaker, { this.ignoredException() })
         return Try.ofSupplier(function).get()
     }
 
