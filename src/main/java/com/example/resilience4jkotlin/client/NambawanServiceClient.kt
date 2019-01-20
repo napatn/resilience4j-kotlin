@@ -13,8 +13,10 @@ class NambawanServiceClient(
 ) {
 
     fun getDataWithCircuitBreaker(): String {
-        val function = CircuitBreaker.decorateSupplier(circuitBreaker, { this.ignoredException() })
-        return Try.ofSupplier(function).get()
+        val function = CircuitBreaker.decorateSupplier(circuitBreaker, { this.myRNG() })
+        return Try.ofSupplier(function)
+                .recover(this::recover)
+                .get()
     }
 
     fun myRNG(): String {
@@ -26,7 +28,14 @@ class NambawanServiceClient(
         } else {
             return success()
         }
+    }
 
+    fun recover(t: Throwable): String {
+        if(t is IgnoreThisException) {
+            circuitBreaker.onSuccess(0)
+        }
+
+        throw t
     }
 
     fun success(): String {
