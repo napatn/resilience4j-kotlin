@@ -13,22 +13,17 @@ import org.springframework.context.annotation.Configuration
 class CircuitBreakerConfiguration {
 
     @Bean
-    fun defaultCircuitBreakerRegistry(): CircuitBreakerRegistry {
-        return CircuitBreakerRegistry.ofDefaults()
-    }
-
-    @Bean
-    fun registry(circuitBreakers: List<CircuitBreaker> , defaultCircuitBreakerRegistry: CircuitBreakerRegistry) : CollectorRegistry {
+    fun registry(circuitBreakers: List<CircuitBreaker> , circuitBreakerRegistry: CircuitBreakerRegistry) : CollectorRegistry {
         val collectorRegistry = CollectorRegistry.defaultRegistry
-        collectorRegistry.register(CircuitBreakerExports.ofCircuitBreakerRegistry(defaultCircuitBreakerRegistry))
+        collectorRegistry.register(CircuitBreakerExports.ofCircuitBreakerRegistry(circuitBreakerRegistry))
         return collectorRegistry
     }
 
     @Bean
     @Qualifier("nambawanCircuitBreaker")
-    fun nambawanCircuitBreaker(defaultCircuitBreakerRegistry: CircuitBreakerRegistry,
+    fun nambawanCircuitBreaker(circuitBreakerRegistry: CircuitBreakerRegistry,
                                circuitBreakerProperties: CircuitBreakerProperties): CircuitBreaker {
         val config = circuitBreakerProperties.createCircuitBreakerConfig("nambawan")
-        return defaultCircuitBreakerRegistry.circuitBreaker("nambawan", config);
+        return circuitBreakerRegistry.circuitBreaker("nambawan", config);
     }
 }
