@@ -16,11 +16,27 @@ management:
 #    rabbit:
 #      enabled: false
 
-resilience4j.circuitbreaker:
-    backends:
-        nambawan:
-            ringBufferSizeInClosedState: 5
-            ringBufferSizeInHalfOpenState: 3
-            waitInterval: 7000
-            failureRateThreshold: 50
-            recordFailurePredicate: com.example.resilience4jkotlin.predicate.NambawanCircuitBreakerPredicate
+resilience4j:
+    circuitbreaker:
+        backends:
+            nambawan:
+                ringBufferSizeInClosedState: 100
+                ringBufferSizeInHalfOpenState: 10
+                waitInterval: 10000
+                failureRateThreshold: 50
+#                eventConsumerBufferSize: 10
+#                registerHealthIndicator: true
+                recordFailurePredicate: com.example.resilience4jkotlin.predicate.NambawanCircuitBreakerPredicate
+#                recordExceptions:
+#                    - org.springframework.web.client.HttpServerErrorException
+#                ignoreExceptions:
+#                    - org.springframework.web.client.HttpClientErrorException
+    ratelimiter:
+        limiters:
+            nambawan:
+                limitForPeriod: 3
+                limitRefreshPeriodInMillis: 10000
+                timeoutInMillis: 0
+                subscribeForEvents: true
+                registerHealthIndicator: true
+                eventConsumerBufferSize: 100

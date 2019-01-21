@@ -9,6 +9,18 @@ class NambawanService(
 ) {
 
     fun method1(): String {
+        return serviceClient.myRNG()
+    }
+
+    fun all(): String {
+        return serviceClient.all()
+    }
+
+    fun circuitbreaker(): String {
         return serviceClient.getDataWithCircuitBreaker()
+    }
+
+    fun ratelimiter(): String {
+        return serviceClient.getDataWithRateLimiter()
     }
 }
