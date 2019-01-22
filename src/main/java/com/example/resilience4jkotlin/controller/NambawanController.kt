@@ -16,11 +16,6 @@ class NambawanController(
         return service.method1()
     }
 
-    @GetMapping("/all")
-    fun all(): String {
-        return service.all()
-    }
-
     @GetMapping("/circuitbreaker")
     fun circuitbreaker(): String {
         return service.circuitbreaker()

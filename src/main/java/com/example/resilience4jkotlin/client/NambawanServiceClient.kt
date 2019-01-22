@@ -12,15 +12,6 @@ class NambawanServiceClient(
         val circuitBreaker: CircuitBreaker
 ) {
 
-    fun all(): String {
-        var supplier = { this.myRNG() }
-        var function = CircuitBreaker.decorateSupplier(circuitBreaker, supplier)
-
-        return Try.ofSupplier(function)
-                .recover(this::recover)
-                .get()
-    }
-
     fun getDataWithCircuitBreaker(): String {
         val function = CircuitBreaker.decorateSupplier(circuitBreaker, { this.myRNG() })
         return Try.ofSupplier(function)

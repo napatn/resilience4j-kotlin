@@ -12,10 +12,6 @@ class NambawanService(
         return serviceClient.myRNG()
     }
 
-    fun all(): String {
-        return serviceClient.all()
-    }
-
     fun circuitbreaker(): String {
         return serviceClient.getDataWithCircuitBreaker()
     }
