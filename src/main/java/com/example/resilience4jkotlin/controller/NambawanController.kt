@@ -25,9 +25,4 @@ class NambawanController(
     fun circuitbreaker(): String {
         return service.circuitbreaker()
     }
-
-    @GetMapping("/ratelimiter")
-    fun ratelimiter(): String {
-        return service.ratelimiter()
-    }
 }

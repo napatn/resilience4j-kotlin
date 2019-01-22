@@ -19,8 +19,4 @@ class NambawanService(
     fun circuitbreaker(): String {
         return serviceClient.getDataWithCircuitBreaker()
     }
-
-    fun ratelimiter(): String {
-        return serviceClient.getDataWithRateLimiter()
-    }
 }
