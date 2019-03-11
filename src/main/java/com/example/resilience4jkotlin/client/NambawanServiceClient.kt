@@ -1,6 +1,6 @@
 package com.example.resilience4jkotlin.client
 
-import com.example.resilience4jkotlin.exception.IgnoreThisException
+import com.example.resilience4jkotlin.exception.BusinessLogicException
 import io.github.resilience4j.circuitbreaker.CircuitBreaker
 import io.vavr.control.Try
 import org.springframework.beans.factory.annotation.Qualifier
@@ -19,34 +19,34 @@ class NambawanServiceClient(
                 .get()
     }
 
-    fun myRNG(): String {
-        val rng = Math.random() * 10 + 1
-        if (rng < 4) {
-            return failed()
-        } else if (rng < 8) {
-            return ignoredException()
-        } else {
-            return success()
-        }
-    }
-
     fun recover(t: Throwable): String {
-        if(t is IgnoreThisException) {
+        if(t is BusinessLogicException) {
             circuitBreaker.onSuccess(0)
         }
 
         throw t
     }
 
+    fun myRNG(): String {
+        val rng = Math.random() * 10 + 1
+        if (rng < 4) {
+            return error()
+        } else if (rng < 8) {
+            return businessLogicError()
+        } else {
+            return success()
+        }
+    }
+
     fun success(): String {
         return "success"
     }
 
-    fun failed(): String {
-        throw Exception("an error, this should trip the circuit open")
+    fun error(): String {
+        throw Exception("an error")
     }
 
-    fun ignoredException(): String {
-        throw IgnoreThisException("an ignored error, this shouldn't change the circuit state")
+    fun businessLogicError(): String {
+        throw BusinessLogicException("an error caused by business logic")
     }
 }

@@ -1,5 +1,5 @@
 package com.example.resilience4jkotlin.exception
 
-class IgnoreThisException(
+class BusinessLogicException(
         override val message: String?
 ): RuntimeException()
