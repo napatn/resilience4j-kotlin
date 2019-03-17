@@ -25,6 +25,27 @@ class Resilience4JConfiguration {
     fun nambawanCircuitBreaker(circuitBreakerRegistry: CircuitBreakerRegistry,
                                circuitBreakerProperties: CircuitBreakerProperties): CircuitBreaker {
         val config = circuitBreakerProperties.createCircuitBreakerConfig("nambawan")
-        return circuitBreakerRegistry.circuitBreaker("nambawan", config);
+        return circuitBreakerRegistry.circuitBreaker("nambawan", config)
     }
+
+//    fun nambawanCircuitBreaker2(circuitBreakerRegistry: CircuitBreakerRegistry): CircuitBreaker {
+//        val config = CircuitBreakerConfig.custom()
+//                .failureRateThreshold(50f)
+//                .waitDurationInOpenState(Duration.ofMillis(1000))
+//                .ringBufferSizeInHalfOpenState(2)
+//                .ringBufferSizeInClosedState(2)
+//                .build()
+//
+//        return circuitBreakerRegistry.circuitBreaker("nambawan", config)
+//    }
+//
+//    fun nambawanCircuitBreaker3(circuitBreakerRegistry: CircuitBreakerRegistry): CircuitBreaker {
+//        val config = CircuitBreakerConfig.ofDefaults()
+//        return circuitBreakerRegistry.circuitBreaker("nambawan", config)
+//    }
+//
+//
+//    fun nambawanCircuitBreaker9(circuitBreakerRegistry: CircuitBreakerRegistry): CircuitBreaker {
+//        return circuitBreakerRegistry.circuitBreaker("nambawan")
+//    }
 }

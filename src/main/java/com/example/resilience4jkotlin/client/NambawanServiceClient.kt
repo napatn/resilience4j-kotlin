@@ -22,9 +22,11 @@ class NambawanServiceClient(
     fun recover(t: Throwable): String {
         if(t is BusinessLogicException) {
             circuitBreaker.onSuccess(0)
+            return "business logic error"
         }
 
-        throw t
+        System.out.println("ERROR!")
+        return "error"
     }
 
     fun myRNG(): String {

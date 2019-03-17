@@ -6,15 +6,6 @@ management:
       base-path: /
       path-mapping:
         prometheus: /metrics
-#  metrics:
-#    distribution:
-#      percentiles-histogram:
-#        http.server.requests: true
-#      sla:
-#        http.server.requests: 300ms
-#  health:
-#    rabbit:
-#      enabled: false
 
 resilience4j:
     circuitbreaker:
@@ -24,19 +15,8 @@ resilience4j:
                 ringBufferSizeInHalfOpenState: 10
                 waitInterval: 10000
                 failureRateThreshold: 50
-#                eventConsumerBufferSize: 10
-#                registerHealthIndicator: true
                 recordFailurePredicate: com.example.resilience4jkotlin.predicate.NambawanCircuitBreakerPredicate
-#                recordExceptions:
-#                    - org.springframework.web.client.HttpServerErrorException
-#                ignoreExceptions:
-#                    - org.springframework.web.client.HttpClientErrorException
-    ratelimiter:
-        limiters:
-            nambawan:
-                limitForPeriod: 3
-                limitRefreshPeriodInMillis: 10000
-                timeoutInMillis: 0
-                subscribeForEvents: true
-                registerHealthIndicator: true
-                eventConsumerBufferSize: 100
+                recordExceptions:
+                    - org.springframework.web.client.HttpServerErrorException
+                ignoreExceptions:
+                    - org.springframework.web.client.HttpClientErrorException
