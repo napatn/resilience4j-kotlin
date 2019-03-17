@@ -2,6 +2,7 @@ package com.example.resilience4jkotlin.client
 
 import com.example.resilience4jkotlin.exception.BusinessLogicException
 import io.github.resilience4j.circuitbreaker.CircuitBreaker
+import io.github.resilience4j.circuitbreaker.CircuitBreakerOpenException
 import io.vavr.control.Try
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Service
@@ -23,6 +24,8 @@ class NambawanServiceClient(
         if(t is BusinessLogicException) {
             circuitBreaker.onSuccess(0)
             return "business logic error"
+        } else if (t is CircuitBreakerOpenException) {
+            return "circuit breaker nambawan is open"
         }
 
         System.out.println("ERROR!")
